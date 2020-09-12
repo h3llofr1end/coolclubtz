@@ -2,10 +2,13 @@
 
 namespace App\Providers;
 
+use App\Events\SendMail;
+use App\Mail\NewMessage;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -27,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Event::listen(function (SendMail $event) {
+//            Mail::to(env('DEFAULT_MAIL_TO'))
+//                ->queue(new NewMessage($event->message));
+        });
     }
 }
